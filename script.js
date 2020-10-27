@@ -6,7 +6,6 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable no-undef */
 
-
 const clock = new THREE.Clock();
 
 function main() {
