@@ -5,9 +5,31 @@
     padding: 0;
     box-sizing: border-box;
     text-align: center;
+    align-items: center;
+    align-content: center;
     font-family: 'Syne Mono', monospace;
 }
 
 #title {
  margin-top: 14px;
+}
+
+body {
+    background-color: whitesmoke;
+}
+
+table {
+    border: 1px solid black;
+    margin-left: auto;
+    margin-right: auto;
+}
+  
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 2px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
 }
