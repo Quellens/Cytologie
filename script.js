@@ -10,20 +10,23 @@ const clock = new THREE.Clock();
 
 function main() {
   const scene = new THREE.Scene();
-  scene.background = new THREE.Color(0xdddddd);
   const camera = new THREE.PerspectiveCamera(75, 600 / 400, 1, 5000);
+  const floor = generateFloor(1000, 1000);
+  const directionalLight = new THREE.DirectionalLight(0x404f4f, 0);
+  const hlight = new THREE.AmbientLight(0x404040, 100);
+
+  scene.background = new THREE.Color(0xdddddd);
   camera.rotation.y = 45/180*Math.PI;
   camera.position.x = 80;
   camera.position.y = 20;
   camera.position.z = 20;
-  const floor = generateFloor(1000, 1000);
-  const directionalLight = new THREE.DirectionalLight(0x404f4f, 0);
+  floor.position.y = -10;
+
   directionalLight.position.set(0, 1, 0);
   directionalLight.castShadow = true;
-  const hlight = new THREE.AmbientLight(0x404040, 100);
   scene.add(hlight);
   //scene.add(directionalLight);
-  floor.position.y = -10;
+
 
   let loader = new THREE.GLTFLoader();
   loader.load("img/scene.gltf", (gltf) => {
@@ -37,7 +40,7 @@ function main() {
         if(child.name.includes("001")){
             let mat = new THREE.MeshStandardMaterial({color: "rgb(255,255,255)"});
             child.material = mat;
-            mat.map = textureLoader.load("img\ textures\ Material.001_specularGlossiness.png")
+            mat.map = textureLoader.load("img/textures/Material.001_specularGlossiness.png")
             console.log(child);
         }
       
@@ -50,25 +53,32 @@ function main() {
     scene.add(floor);
 
   const renderer = new THREE.WebGLRenderer( {antialias: true});
-    // eslint-disable-next-line no-unused-vars
+
   const controls = new THREE.OrbitControls(camera, renderer.domElement);
+  controls.enableDamping = true;
+  controls.dampingFactor = 0.05;
+  controls.autoRotate = true;
+ // controls.screenSpacePanning = false;
+  controls.minDistance = 10;
+  controls.maxDistance = 500;
+
+  controls.maxPolarAngle = Math.PI / 2;
   const container = document.getElementById('container');
   renderer.setSize(600, 400);
   container.appendChild(renderer.domElement);
   renderer.render(scene, camera);
-  update(renderer, scene, camera);
+  update(renderer, scene, camera, controls);
   
 }
 
 main();
 
-function update(renderer, scene, camera) {
-   
-  // camera.position.copy(playerObjectHolder.position).add(new THREE.Vector3(7, 3, 7));
+function update(renderer, scene, camera, controls) {
+  controls.update();
   renderer.render(scene, camera);
   const delta = clock.getDelta();
   requestAnimationFrame(() => {
-    update(renderer, scene, camera);
+    update(renderer, scene, camera, controls);
   });
 }
 
