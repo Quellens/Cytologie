@@ -11,46 +11,29 @@ const clock = new THREE.Clock();
 function main() {
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(75, 600 / 400, 1, 5000);
-  const floor = generateFloor(1000, 1000);
-  const directionalLight = new THREE.DirectionalLight(0x404f4f, 0);
-  const hlight = new THREE.AmbientLight(0x404040, 100);
-
-  scene.background = new THREE.Color(0xdddddd);
+  const light1 = new THREE.PointLight(0x404040, 3);
+  light1.position.set(0, 70, 70);
+  const light2 = new THREE.PointLight(0x404040, 5);
+  light2.position.set(70,70,0)
+  scene.background = new THREE.Color(0xD1D1D1);
   camera.rotation.y = 45/180*Math.PI;
-  camera.position.x = 80;
-  camera.position.y = 20;
-  camera.position.z = 20;
-  floor.position.y = -10;
+  camera.position.x = 30;
+  camera.position.y = 30;
+  camera.position.z = 30;
 
-  directionalLight.position.set(0, 1, 0);
-  directionalLight.castShadow = true;
-  scene.add(hlight);
-  //scene.add(directionalLight);
+  scene.add(light2);
+  scene.add(light1);
 
 
   let loader = new THREE.GLTFLoader();
   loader.load("img/scene.gltf", (gltf) => {
-    const cell = gltf.scene.children[0];
+    const cell = gltf.scene;
     cell.scale.set(10, 10, 10);
-    const textureLoader = new THREE.TextureLoader();
-    
-    console.log(cell);
-    cell.children[0].children[0].traverse((child) => {
-       
-        if(child.name.includes("001")){
-            let mat = new THREE.MeshStandardMaterial({color: "rgb(255,255,255)"});
-            child.material = mat;
-            mat.map = textureLoader.load("img/textures/Material.001_specularGlossiness.png")
-            console.log(child);
-        }
-      
-    })
-
-
-    camera.lookAt(new THREE.Vector3(cell.position.x, cell.position.y, cell.position.z));
+    cell.receiveShadow = true;
+    cell.castShadow = true;
+  
     scene.add(cell);
   });
-    scene.add(floor);
 
   const renderer = new THREE.WebGLRenderer( {antialias: true});
 
@@ -58,11 +41,10 @@ function main() {
   controls.enableDamping = true;
   controls.dampingFactor = 0.05;
   controls.autoRotate = true;
- // controls.screenSpacePanning = false;
-  controls.minDistance = 10;
-  controls.maxDistance = 500;
-
-  controls.maxPolarAngle = Math.PI / 2;
+  controls.screenSpacePanning = false;
+  controls.minDistance = 7;
+  controls.maxDistance = 22;
+  controls.maxPolarAngle = Math.PI / 2.1;
   const container = document.getElementById('container');
   renderer.setSize(600, 400);
   container.appendChild(renderer.domElement);
@@ -80,22 +62,4 @@ function update(renderer, scene, camera, controls) {
   requestAnimationFrame(() => {
     update(renderer, scene, camera, controls);
   });
-}
-
-
-function generateFloor(w, d) {
-  const texture = new THREE.TextureLoader().load('https://threejs.org/examples/textures/brick_diffuse.jpg');
-  texture.wrapS = THREE.RepeatWrapping;
-  texture.wrapT = THREE.RepeatWrapping;
-  texture.repeat.set(40, 40);
-  const geo = new THREE.PlaneGeometry(w, d, 1, 1);
-  const mat = new THREE.MeshBasicMaterial({
-    color: 0xEB6534,
-    map: texture,
-
-  });
-  const mesh = new THREE.Mesh(geo, mat);
-  mesh.material.side = THREE.DoubleSide;
-  mesh.rotation.x = THREE.Math.degToRad(-90);
-  return mesh;
 }
