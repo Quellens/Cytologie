@@ -33,3 +33,9 @@ td, th {
 tr:nth-child(even) {
     background-color: #dddddd;
 }
+
+button {
+    width: 70%;
+    height: 45px;
+    font-size: larger;
+}
