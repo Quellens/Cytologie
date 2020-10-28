@@ -55,16 +55,18 @@ function main() {
   var bool = false;
    button.addEventListener("click", () => {
     const heading = document.getElementById("heading");
-    var models = scene.children.filter(child => child.name != "light");
+    const models = scene.children.filter(child => child.name != "light");
     if(bool){
       models[0].visible = true;
       heading.innerText = "Pflanzenzelle:";
       models[1].visible = false;
+      table.style.opacity = 1;
     }
     if(!bool){
       models[1].visible = true;
       heading.innerText = "Tierzelle:";
       models[0].visible = false;
+      table.style.opacity = 0;
     }
     bool = !bool;
    });
@@ -97,3 +99,74 @@ function update(renderer, scene, camera, controls) {
     update(renderer, scene, camera, controls);
   });
 }
+
+
+
+function generateTableHead(table, data) {
+  let thead = table.createTHead();
+  let row = thead.insertRow();
+  for (let key of data) {
+    let th = document.createElement("th");
+    let text = document.createTextNode(key);
+    th.appendChild(text);
+    row.appendChild(th);
+  }
+}
+
+
+function generateTable(table, data) {
+  for (let element of data) {
+    let row = table.insertRow();
+    for (key in element) {
+      let cell = row.insertCell();
+      let text = document.createTextNode(element[key]);
+      cell.appendChild(text);
+    }
+  }
+}
+
+const table = document.createElement("table");
+table.id = "plant";
+
+generateTableHead(table, [ "Zahl", "Zellorganell"])      
+generateTable(table, [{Zahl:1,
+  Zellorganell:"Zellkern (Nucleus)",
+},  {
+  Zahl:2,
+  Zellorganell: "Zellkern (Nucleus)",
+},  {
+  Zahl:3,
+  Zellorganell: "raues Endoplasmatisches Retikulum",
+},  {
+  Zahl:4,
+  Zellorganell: "glattes Endoplasmatisches Retikulum",
+},  {
+  Zahl:5,
+  Zellorganell: "Vakuole",
+},  {
+  Zahl:6,
+  Zellorganell:"Goldi-Apparat",
+} ,  {
+  Zahl:7,
+  Zellorganell:"Chloroplast",
+},  {
+  Zahl:8,
+  Zellorganell:"Mitochondrien",
+},  {
+  Zahl:9,
+  Zellorganell: "Vesikel",
+},  {
+  Zahl:10,
+  Zellorganell: "Lysosom",
+},  {
+  Zahl: 11,
+  Zellorganell: "Zellplasma",
+},  {
+  Zahl:12,
+  Zellorganell: "Zellmembran/ Zellwand",
+},  {
+  Zahl : 13,
+  Zellorganell: "Ribosom",
+}]);
+
+document.body.appendChild(table);
