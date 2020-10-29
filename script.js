@@ -61,7 +61,7 @@ function main() {
       cell.visible = false;
       cell.name = "3";
       scene.add(cell);
-      button.innerText = "⏭ Nächstes 3D-Modell";
+      button.innerText = "⏭ Nächstes 3D-Modell 🔁";
       container.appendChild(button);
     });
 
@@ -158,7 +158,7 @@ generateTable(table, [{Zahl:1,
   Zellorganell:"Zellkern (Nucleus)",
 },  {
   Zahl:2,
-  Zellorganell: "Zellkern (Nucleus)",
+  Zellorganell: "Karyoplasma ",
 },  {
   Zahl:3,
   Zellorganell: "raues Endoplasmatisches Retikulum",

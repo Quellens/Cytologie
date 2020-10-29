@@ -1,12 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Syne+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Trispace:wght@500&display=swap');
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     text-align: center;
-    align-items: center;
-    align-content: center;
     font-family: 'Syne Mono', monospace;
 }
 
@@ -50,4 +49,34 @@ button {
 #plant td {
   font-size: 11px;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+ul {
+    margin-bottom: 40px;
+}
+
+li {
+    text-align: left;
+    margin-left: 20%;
+    /*font-size: larger;*/
+    font-family: 'Trispace', sans-serif;
+}
+
+strong {
+    font-size: x-large;
+}
+
+h2 {
+    font-size: 30px;
+    text-decoration: underline;
+}
+
+#end {
+    background-color: grey;
+    height: 80px;
+}
+
+a {
+    text-decoration: none;
+    color: honeydew;
 }
