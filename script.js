@@ -34,41 +34,66 @@ function main() {
   let loader = new THREE.GLTFLoader();
     loader.load("img/plant/scene.gltf", (gltf) => {
       const cell = gltf.scene;
-        cell.scale.set(10, 10, 10);
-        cell.position.y += 5;
+      cell.scale.set(10, 10, 10);
+      cell.position.y += 5;
+      cell.name = "1";
       scene.add(cell);
     });
-  let loader2 = new THREE.GLTFLoader();
-    loader2.load("img/animal/scene.gltf", (gltf) => {
+  
+    loader.load("img/animal/scene.gltf", (gltf) => {
       const cell = gltf.scene;
       cell.scale.set(5,5,5);
       cell.position.y =4;
       cell.position.x = 2;
       cell.position.z = -4;
       cell.visible = false;
+      cell.name = "2";
       scene.add(cell);
-      button.innerText = "⏭";
+    });
+
+
+    loader.load("img/procariot/scene.gltf", (gltf) => {
+      const cell = gltf.scene;
+      cell.scale.set(3,3,3);
+      cell.position.y = -0;
+      cell.position.x = 0;
+      cell.position.z = -0;
+      cell.visible = false;
+      cell.name = "3";
+      scene.add(cell);
+      button.innerText = "⏭ Nächstes 3D-Modell";
       container.appendChild(button);
     });
 
 
-  var bool = false;
+  var i = 1;
    button.addEventListener("click", () => {
     const heading = document.getElementById("heading");
-    const models = scene.children.filter(child => child.name != "light");
-    if(bool){
+    const models = scene.children.filter(child => child.name != "light")
+    .sort((a,b) => parseInt(a.name) - parseInt(b.name) );
+    console.log(models);
+    if( i%3 == 0){
       models[0].visible = true;
       heading.innerText = "Pflanzenzelle:";
       models[1].visible = false;
+      models[2].visible = false;
       table.style.opacity = 1;
     }
-    if(!bool){
+    if(i%3 == 1){
       models[1].visible = true;
       heading.innerText = "Tierzelle:";
       models[0].visible = false;
       table.style.opacity = 0;
     }
-    bool = !bool;
+
+    if(i%3 == 2){
+      models[2].visible = true;
+      models[0].visible = false;
+      models[1].visible = false;
+      heading.innerText = "Prokariot/ Bakterienzelle:";
+    }
+
+    i++;
    });
 
  
