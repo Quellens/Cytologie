@@ -52,13 +52,12 @@ button {
 }
 
 ul {
-    margin-bottom: 40px;
+   margin-bottom: 40px;
 }
 
 li {
     text-align: left;
     margin-left: 20%;
-    /*font-size: larger;*/
     font-family: 'Trispace', sans-serif;
 }
 
@@ -69,6 +68,20 @@ strong {
 h2 {
     font-size: 30px;
     text-decoration: underline;
+}
+
+#prokaryot {
+   border-radius: 30px;
+   background-color: cornsilk;
+   border: 1px solid black;
+   margin-left: 10%;
+   margin-right: 80px;
+}
+
+#prokaryot li {
+    margin-left: 10%;
+    margin-bottom: 5px;
+
 }
 
 #end {

@@ -39,18 +39,6 @@ function main() {
       cell.name = "1";
       scene.add(cell);
     });
-  
-    loader.load("img/animal/scene.gltf", (gltf) => {
-      const cell = gltf.scene;
-      cell.scale.set(5,5,5);
-      cell.position.y =4;
-      cell.position.x = 2;
-      cell.position.z = -4;
-      cell.visible = false;
-      cell.name = "2";
-      scene.add(cell);
-    });
-
 
     loader.load("img/procariot/scene.gltf", (gltf) => {
       const cell = gltf.scene;
@@ -61,9 +49,21 @@ function main() {
       cell.visible = false;
       cell.name = "3";
       scene.add(cell);
+    });
+
+    loader.load("img/animal/scene.gltf", (gltf) => {
+      const cell = gltf.scene;
+      cell.scale.set(5,5,5);
+      cell.position.y =4;
+      cell.position.x = 2;
+      cell.position.z = -4;
+      cell.visible = false;
+      cell.name = "2";
+      scene.add(cell);
       button.innerText = "⏭ Nächstes 3D-Modell 🔁";
       container.appendChild(button);
     });
+
 
 
   var i = 1;
@@ -71,7 +71,7 @@ function main() {
     const heading = document.getElementById("heading");
     const models = scene.children.filter(child => child.name != "light")
     .sort((a,b) => parseInt(a.name) - parseInt(b.name) );
-    console.log(models);
+
     if( i%3 == 0){
       models[0].visible = true;
       heading.innerText = "Pflanzenzelle:";
@@ -90,7 +90,7 @@ function main() {
       models[2].visible = true;
       models[0].visible = false;
       models[1].visible = false;
-      heading.innerText = "Prokariot/ Bakterienzelle:";
+      heading.innerText = "Prokaryotische Zelle/ Bakterienzelle:";
     }
 
     i++;
@@ -182,7 +182,7 @@ generateTable(table, [{Zahl:1,
   Zellorganell: "Vesikel",
 },  {
   Zahl:10,
-  Zellorganell: "Lysosom",
+  Zellorganell: "weiteres Vesikel",
 },  {
   Zahl: 11,
   Zellorganell: "Zellplasma",
