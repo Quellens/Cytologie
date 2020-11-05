@@ -155,10 +155,10 @@ table.id = "plant";
 
 generateTableHead(table, [ "Zahl", "Zellorganell"])      
 generateTable(table, [{Zahl:1,
-  Zellorganell:"Zellkern (Nucleus)",
+  Zellorganell:"Nucleolus",
 },  {
   Zahl:2,
-  Zellorganell: "Karyoplasma ",
+  Zellorganell: "Karyoplasma/ Zellkern (Nucleus)",
 },  {
   Zahl:3,
   Zellorganell: "raues Endoplasmatisches Retikulum",
@@ -191,7 +191,7 @@ generateTable(table, [{Zahl:1,
   Zellorganell: "Zellmembran/ Zellwand",
 },  {
   Zahl : 13,
-  Zellorganell: "Ribosom",
+  Zellorganell: "Ribosome",
 }]);
 
 document.body.appendChild(table);
