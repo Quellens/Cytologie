@@ -62,6 +62,7 @@ function main() {
       scene.add(cell);
       button.innerText = "⏭ Nächstes 3D-Modell 🔁";
       container.appendChild(button);
+      document.getElementById("notloaded").remove();
     });
 
 
